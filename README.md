@@ -1,8 +1,8 @@
 # ICT MNQ Trading System
 
-🎯 **ICT-based MNQ futures trading system for MFFU $50K prop firm evaluation**
+**MFFU $50K Prop Firm Evaluation System**
 
-This repository contains a complete trading system based on Inner Circle Trader (ICT) concepts, including the Market Maker Models (MMXM).
+A comprehensive ICT-based trading system for MNQ futures, featuring MMXM (Market Maker Models), FVG, Order Block, and Silver Bullet setups.
 
 ## Account Parameters
 
@@ -17,39 +17,68 @@ This repository contains a complete trading system based on Inner Circle Trader 
 
 ## What's Included
 
-### Skill File (`SKILL.md`)
-Upload to Claude Settings → Features → Skills for persistent knowledge across all chats.
+### Skill File
+- `ict-trading-system.skill` - Install in Claude Settings → Features → Skills for persistent knowledge
 
-### Reference Files
-- `references/mmxm-model.md` - Complete MMXM (Market Maker Buy/Sell Models)
-- `references/ict-setups.md` - Standard ICT setups (Liquidity Sweep, OB+MSS, Silver Bullet, OTE)
-- `references/bias-determination.md` - HTF bias rules and scoring
-- `references/session-times.md` - Kill zones and session rules
+### Reference Documents
+- `playbook/ICT-MNQ-Trading-Playbook.md` - Complete trading playbook
+- `skill/references/mmxm-models.md` - MMXM (MMBM/MMSM) deep dive
+- `skill/references/ict-setups.md` - All ICT setup criteria
+- `skill/references/bias-determination.md` - HTF bias scoring
+- `skill/references/session-times.md` - Kill zone timing
 
-### Assets
-- `assets/trade-template.md` - Input template for trade analysis requests
+### Tools
+- `tools/ICT-Trade-Analyzer.jsx` - React form for structured trade inputs
 
 ## Setup Priority
 
-1. **MMXM** - Full 5-phase Market Maker structure (highest probability)
-2. **Liquidity Sweep + FVG** - Quick reversal entries
-3. **Order Block + MSS** - Structure shift entries
-4. **Silver Bullet** - Time-window specific (10:00-11:00, 14:00-15:00 ET)
-5. **OTE** - Fibonacci retracement entries
+1. **MMXM** - Market Maker Models (highest probability)
+2. **Liquidity Sweep + FVG** - Classic ICT entry
+3. **Silver Bullet** - Time-window specific (10:00-11:00 / 14:00-15:00 ET)
+4. **Order Block + MSS** - Structure-based entry
+5. **OTE** - Fibonacci retracement entry
+
+## MMXM Quick Reference
+
+### MMBM (Market Maker Buy Model) - For Longs
+```
+1. Original Consolidation (target)
+        ↓
+2. Engineering Liquidity (lower highs, SSL building)
+        ↓
+3. ★ SMART MONEY REVERSAL ★ (ENTRY)
+        ↓
+4. Buy Program (accumulation)
+        ↓
+5. Terminus (completion)
+```
+
+### MMSM (Market Maker Sell Model) - For Shorts
+```
+1. Original Consolidation (target)
+        ↓
+2. Engineering Liquidity (higher lows, BSL building)
+        ↓
+3. ★ SMART MONEY REVERSAL ★ (ENTRY)
+        ↓
+4. Sell Program (distribution)
+        ↓
+5. Terminus (completion)
+```
 
 ## Trading Sessions (ET)
 
 | Session | Time | Action |
 |---------|------|--------|
-| NY AM Kill Zone | 09:30-11:00 | ✅ PRIMARY |
-| NY PM Kill Zone | 14:00-15:00 | ✅ Secondary |
-| NY Lunch | 11:00-13:00 | ❌ AVOID |
-| London | 02:00-05:00 | ⚠️ Selective |
+| NY AM Kill Zone | 09:30-11:00 | **PRIMARY** |
+| NY PM Kill Zone | 14:00-15:00 | Secondary |
+| NY Lunch | 11:00-13:00 | **AVOID** |
+| London | 02:00-05:00 | Selective |
 
-## Quick Usage
+## Usage
 
-In any Claude chat (with skill installed), send:
-
+### With Claude Skill Installed
+Just provide your setup data:
 ```
 NY AM | 10:15 | Price: 21450
 PDH: 21500 | PDL: 21350
@@ -60,16 +89,8 @@ P&L: $0 | Trades: 0
 Setup: Swept PDL, displacement, FVG left
 ```
 
-Claude will respond with entry, SL, TP, and reasoning.
-
-## Risk Rules
-
-- Max 25 points SL per trade
-- Stop trading if down $1,500/day
-- Wait 30 min after any loss
-- No trading 15 min around high-impact news
-- Max 3-4 trades per day
+Claude will respond with entry, SL, TP, and ICT reasoning.
 
 ## License
 
-Personal use only. Not financial advice.
+Personal use only. Trade responsibly.
